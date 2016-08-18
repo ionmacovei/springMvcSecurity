@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
@@ -28,10 +29,13 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+
+
 @Configuration
 @ComponentScan("net.codejava*")
 @EnableWebMvc
 @EnableTransactionManagement
+@Import({ SecurityConfig.class })
 public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
     @Bean(name = "viewResolver")
     public InternalResourceViewResolver getViewResolver() {
