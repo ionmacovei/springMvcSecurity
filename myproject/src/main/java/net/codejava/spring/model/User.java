@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
@@ -39,6 +40,9 @@ public class User {
 	private List<Project> projects;
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Adress.class, mappedBy = "user")
 	private List<Adress> adresses;
+	 @ManyToOne(fetch = FetchType.EAGER)
+	    @JoinColumn(name = "user_role_id")
+	    private Role role;
 
 	
 	public int getId() {
