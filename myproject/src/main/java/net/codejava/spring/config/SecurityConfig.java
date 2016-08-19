@@ -37,8 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		final String findUserQuery = "select username,password,enabled " + "from users " + "where username = ?";
-		final String findRoles = "select username,authority " + "from role " + "where username = ?";
+		final String findUserQuery = "select username,password,true " + "from users " + "where username = ?";
+		final String findRoles = "select username, authority " + "from role " + "where username = ?";
 
 		auth.jdbcAuthentication().dataSource(ds).usersByUsernameQuery(findUserQuery)
 				.authoritiesByUsernameQuery(findRoles);
