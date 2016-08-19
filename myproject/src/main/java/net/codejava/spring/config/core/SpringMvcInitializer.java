@@ -5,12 +5,13 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 
 import net.codejava.spring.config.ApplicationContextConfig;
+import net.codejava.spring.config.SecurityConfig;
 
 public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { ApplicationContextConfig.class };
+		return new Class[] { ApplicationContextConfig.class,  };
 	}
 
 	@Override

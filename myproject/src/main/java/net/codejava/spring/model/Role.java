@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,14 +23,13 @@ public class Role implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-    @Column(name = "User_Role_Id")
+    @Column(name = "role_Id")
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long roleId;
     @Column(name = "authority")
     private String authority;
 
-    @OneToMany(mappedBy = "role",fetch = FetchType.EAGER)
-    @JoinColumn(name= "user_role_id")
+    @OneToMany(mappedBy = "role", cascade= CascadeType.ALL, fetch= FetchType.EAGER)
     private Set<User> usersList = new HashSet<User>();
 
 
