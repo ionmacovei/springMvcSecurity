@@ -1,6 +1,7 @@
 package net.codejava.spring.model;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,28 +21,28 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 public class User {
 	@Id
 	@GeneratedValue
 	@Column(name = "USER_ID")
 	private int id;
-	@Size(min = 2, max = 30, message = "blabla-bla")
+	@Size(min = 2, max = 30, message = "min 2")
 	private String username;
 	@Size(min = 8, message = "mai mare ca 8")
 	private String password;
 	@NotEmpty(message = "nu trebuie sa fie gol")
 	@Email(message = "zdesi ii e-mail")
 	private String email;
+	@Column(name = "enabled", nullable = false)
 	private Boolean enabled;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_project", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
 	private List<Project> projects;
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Adress.class, mappedBy = "user")
 	private List<Adress> adresses;
-	@ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
-	@JoinColumn(name = "user_role_id")
-	private Role role;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<UserRole> roles;
 
 	public int getId() {
 		return id;
@@ -75,21 +76,22 @@ public class User {
 		this.email = email;
 	}
 	
-
-	public Boolean getEnabled() {
-		return enabled;
+	public boolean isEnabled() {
+		return this.enabled;
 	}
 
-	public void setEnabled(Boolean enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
-	public Role getRole() {
-		return role;
+
+	
+	public Set<UserRole> getUserRole() {
+		return this.roles;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setUserRole(Set<UserRole> roles) {
+		this.roles = roles;
 	}
 
 	public List<Adress> getAdresses() {

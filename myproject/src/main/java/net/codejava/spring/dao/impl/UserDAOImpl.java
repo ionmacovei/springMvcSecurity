@@ -1,6 +1,7 @@
 package net.codejava.spring.dao.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.codejava.spring.dao.UserDao;
@@ -100,5 +101,21 @@ public class UserDAOImpl extends GenericDaoImpl implements UserDao {
 		Query query = getCurrentSesion().createQuery(hql);
 		query.setParameter("projectId",projectId);
 		return query.list();
-	}			
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public User findByUserName(String username) {
+
+		List<User> users = new ArrayList<User>();
+
+		users = getCurrentSesion().createQuery("from User where username=?").setParameter(0, username)
+				.list();
+
+		if (users.size() > 0) {
+			return users.get(0);
+		} else {
+			return null;
+		}
+
+	}
 }

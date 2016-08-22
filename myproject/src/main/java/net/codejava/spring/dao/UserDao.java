@@ -19,4 +19,6 @@ public interface UserDao  extends GenericDao{
 	public User get(Serializable id);
 	
 	public List<User> getUsersFromProject(Integer projectId);
+	
+	public User findByUserName(String username) ;
 }
