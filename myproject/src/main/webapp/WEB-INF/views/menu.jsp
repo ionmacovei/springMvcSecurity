@@ -49,6 +49,10 @@
 					</ul>
 				</div>
 			</div></li>
+			<li><p class="logout"><a class="logout" href="logout">Logout</a></p></li>
+		
 
 	</ul>
+	
 	</nav>
+	
